@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanLogger", "CanLogger\CanLogger.csproj", "{BFF50ED0-0525-48CD-B080-8F2FC83273B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CANBus-Triple-Dll", "CANBus-Triple-Dll\CANBus-Triple-Dll.csproj", "{CAF2211A-F611-4BFD-A5AE-0DB6A9057A3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFF50ED0-0525-48CD-B080-8F2FC83273B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF50ED0-0525-48CD-B080-8F2FC83273B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF50ED0-0525-48CD-B080-8F2FC83273B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF50ED0-0525-48CD-B080-8F2FC83273B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAF2211A-F611-4BFD-A5AE-0DB6A9057A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAF2211A-F611-4BFD-A5AE-0DB6A9057A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAF2211A-F611-4BFD-A5AE-0DB6A9057A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAF2211A-F611-4BFD-A5AE-0DB6A9057A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

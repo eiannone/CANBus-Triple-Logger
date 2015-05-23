@@ -1,0 +1,3 @@
+[submodule "CANBus-Triple-Dll"]
+	path = CANBus-Triple-Dll
+	url = https://github.com/eiannone/CANBus-Triple-Dll
