@@ -233,7 +233,7 @@ namespace CanLogger
             var border = VisualTreeHelper.GetChild(DgLog, 0) as Decorator;
             if (border != null) {
                 var scroll = border.Child as ScrollViewer;
-                if (scroll != null) scroll.ScrollToEnd();
+                scroll?.ScrollToEnd();
             }
         }
 
@@ -241,13 +241,8 @@ namespace CanLogger
         {
             if (msg.Bus != _bus) return;
 
-            if (_sw != null) {
-                _sw.WriteLine("\"" + msg.Time + "\";"
-                    + "\"" + String.Format("{0:X3}", msg.Id) + "\";"
-                    + "\"" + msg.HexData + "\";"
-                    + msg.Status + ";"
-                    + "\"\"");
-            }
+            _sw?.WriteLine("\"" + msg.Time + "\";\"" + $"{msg.Id:X3}" + "\";\"" + msg.HexData + "\";"
+                           + msg.Status + ";\"\"");
             _buffer.AddMessage(msg);
         }
 
@@ -258,7 +253,7 @@ namespace CanLogger
                 Settings.Default.PortName = e.AddedItems[0].ToString();
                 Settings.Default.Save();
             }
-            if (_cbt != null) _cbt.SetComPort(e.AddedItems[0].ToString());
+            _cbt?.SetComPort(e.AddedItems[0].ToString());
         }
 
         private void BtClear_OnClick(object sender, RoutedEventArgs e)

@@ -42,10 +42,7 @@ namespace CanLogger
             private set;
         }
 
-        public bool Busy
-        {
-            get { return _timer.Enabled;  }
-        }
+        public bool Busy => _timer.Enabled;
 
         public void Connect()
         {
@@ -105,13 +102,7 @@ namespace CanLogger
             }
         }
 
-        public long ElapsedMicroseconds
-        {
-            get
-            {
-                return (long)(ElapsedTicks * _microSecPerTick);
-            }
-        }
+        public long ElapsedMicroseconds => (long)(ElapsedTicks * _microSecPerTick);
     }
 
     /// <summary>
@@ -198,8 +189,7 @@ namespace CanLogger
                                   ref _stopTimer);
             };
 
-            _threadTimer = new Thread(threadStart);
-            _threadTimer.Priority = ThreadPriority.Highest;
+            _threadTimer = new Thread(threadStart) {Priority = ThreadPriority.Highest};
             _threadTimer.Start();
         }
 
@@ -238,31 +228,31 @@ namespace CanLogger
                                ref long ignoreEventIfLateBy,
                                ref bool stopTimer)
         {
-            int timerCount = 0;
+            var timerCount = 0;
             long nextNotification = 0;
 
-            MicroStopwatch microStopwatch = new MicroStopwatch();
+            var microStopwatch = new MicroStopwatch();
             microStopwatch.Start();
 
             while (!stopTimer) {
-                long callbackFunctionExecutionTime =
+                var callbackFunctionExecutionTime =
                     microStopwatch.ElapsedMicroseconds - nextNotification;
 
-                long timerIntervalInMicroSecCurrent =
+                var timerIntervalInMicroSecCurrent =
                     Interlocked.Read(ref timerIntervalInMicroSec);
-                long ignoreEventIfLateByCurrent =
+                var ignoreEventIfLateByCurrent =
                     Interlocked.Read(ref ignoreEventIfLateBy);
 
                 nextNotification += timerIntervalInMicroSecCurrent;
                 timerCount++;
-                long elapsedMicroseconds = 0;
+                long elapsedMicroseconds;
 
                 while ((elapsedMicroseconds = microStopwatch.ElapsedMicroseconds)
                         < nextNotification) {
                     Thread.SpinWait(10);
                 }
 
-                long timerLateBy = elapsedMicroseconds - nextNotification;
+                var timerLateBy = elapsedMicroseconds - nextNotification;
 
                 if (timerLateBy >= ignoreEventIfLateByCurrent) {
                     continue;
@@ -273,7 +263,7 @@ namespace CanLogger
                                              elapsedMicroseconds,
                                              timerLateBy,
                                              callbackFunctionExecutionTime);
-                MicroTimerElapsed(this, microTimerEventArgs);
+                MicroTimerElapsed?.Invoke(this, microTimerEventArgs);
             }
 
             microStopwatch.Stop();
