@@ -93,7 +93,7 @@ namespace CanLogger
                     throw new Exception("Unable to identify CANBus Triple");
                 
                 LbInfo.Content = info["name"] + " " + info["version"];
-                ImgConnect.Source = (ImageSource)Resources["ImgDisconnect"];
+                ImgConnect.Source = (ImageSource)Resources["ImgConnect"];
                 ImgConnect.Opacity = 1;
                 LbConnect.Content = "Connected";
                 BtConnect.ToolTip = "Disconnect";
@@ -134,6 +134,13 @@ namespace CanLogger
                 if (BtConnect.IsChecked != true) BtConnect.IsChecked = true;
                 _timer.Start();
                 if (BtSave.IsChecked == true) StartLog();
+                // Await connection
+                var timeout = 5000;
+                while ((!_cbt.Connected || _cbt.Busy) && timeout > 0) {
+                    await Task.Delay(100);
+                    timeout -= 100;
+                }
+                if (timeout == 0) throw new Exception("Unable to start logging. Connection timeout.");
                 if (BtFilter.IsChecked == true && (_filter1 > 0 || CbMask.IsChecked == true))  {
                     await _cbt.EnableLogWithMask(_bus, _filter1, _mask1);
                 }
@@ -231,10 +238,9 @@ namespace CanLogger
             
             // Autoscroll to last item
             var border = VisualTreeHelper.GetChild(DgLog, 0) as Decorator;
-            if (border != null) {
-                var scroll = border.Child as ScrollViewer;
-                scroll?.ScrollToEnd();
-            }
+            if (border == null) return;
+            var scroll = border.Child as ScrollViewer;
+            scroll?.ScrollToEnd();
         }
 
         void cbt_CanMessageReceived(CanMessage msg)

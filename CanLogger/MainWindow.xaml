@@ -217,7 +217,7 @@
                 <Image Source="Resources/refresh.png" />
             </Button>
             <ToggleButton x:Name="BtConnect" Style="{StaticResource ButToggle}" BorderThickness="0" 
-				Checked="btConnect_Checked" Unchecked="btConnect_Unchecked">
+				Checked="btConnect_Checked" Unchecked="btConnect_Unchecked" ToolTip="Connect" IsEnabled="False">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Height="26">
                     <Image x:Name="ImgConnect" Source="{StaticResource ImgDisconnect}" Width="16"/>
                     <Label x:Name="LbConnect" Content="Disconnected" Padding="5,0" VerticalContentAlignment="Center" />
