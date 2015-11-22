@@ -15,6 +15,8 @@ must run the following commands:
 ```
 git clone https://github.com/eiannone/CANBus-Triple-Logger
 
+cd CANBus-Triple-Logger
+
 git submodule init
 
 git submodule update
